@@ -306,6 +306,16 @@ If you want to customize or add methods to the sfGuardAuth:
           }
         }
 
+## Customize `sfGuardRegister` module form ##
+
+By default the `sfGuardRegister` module uses the `sfGuardRegisterForm`. If you'd like to use another  
+form you can set the class name in your app.yml
+	
+	# apps/frontend/config/app.yml
+	all:
+		sf_guard_plugin:
+			register_form: RegisterForm
+
 ## `sfGuardSecurityUser` class ##
 
 This class inherits from Symfony's `sfBasicSecurityUser` class and is
