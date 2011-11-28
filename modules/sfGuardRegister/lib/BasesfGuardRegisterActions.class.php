@@ -10,7 +10,7 @@ class BasesfGuardRegisterActions extends sfActions
       $this->redirect('@homepage');
     }
 
-    $class = sfConfig::get('app_sf_guard_plugin_register_form', 'sfGuardRegisterForm'); 
+    $class = sfConfig::get('app_sf_guard_plugin_register_form', 'sfGuardRegisterForm');
     $this->form = new $class();
 
     if ($request->isMethod('post'))
@@ -24,9 +24,13 @@ class BasesfGuardRegisterActions extends sfActions
           ->getReturnValue();
 
         $user = $this->form->save();
-        $this->getUser()->signIn($user);
 
-        $this->redirect('@homepage');
+        if (sfConfig::get('app_sf_guard_plugin_register_instant_signin', true))
+        {
+          $this->getUser()->signIn($user);
+        }
+
+        $this->redirect(sfConfig::get('app_sf_guard_plugin_register_destination_route', '@homepage'));
       }
     }
   }
